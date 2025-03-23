@@ -18,8 +18,8 @@ const port = process.env.PORT || 80; // default port to listen
 const users: Socket[] = [];
 const userLimit = Number(process.env.USER_LIMIT) || Infinity;
 
-app.get('/', (req, res) => {
-    console.log("Excalidraw backend is up :)");
+app.get('/health', (req, res) => {
+    console.log("Health Excalidraw backend is up :)");
     res.send('Excalidraw backend is up :)');
 });
 
