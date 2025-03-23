@@ -49,12 +49,14 @@ prometheus.metrics(io, {
 });
 
 io.on('connection', socket => {
+    console.log("connection YAY!!");
     serverDebug(`connection established! ${socket.conn.request.url}`);
     io.to(`${socket.id}`).emit('init-room');
     socket.on('join-room', roomID => {
         serverDebug(`${socket.id} has joined ${roomID} for url ${socket.conn.request.url}`);
         socket.join(roomID);
-
+        console.log('roomID', roomID);
+        console.log("hello hello")
         users.push(socket);
         socket.on('close', () => {
             users.splice(users.indexOf(socket), 1);
