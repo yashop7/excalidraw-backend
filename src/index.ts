@@ -19,6 +19,7 @@ const users: Socket[] = [];
 const userLimit = Number(process.env.USER_LIMIT) || Infinity;
 
 app.get('/', (req, res) => {
+    console.log("Excalidraw backend is up :)");
     res.send('Excalidraw backend is up :)');
 });
 
