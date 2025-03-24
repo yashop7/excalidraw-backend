@@ -4,6 +4,7 @@ import express from 'express';
 import http from 'http';
 import socketIO, { Socket } from 'socket.io';
 import * as prometheus from 'socket.io-prometheus-metrics';
+import promClient from 'prom-client'; // Added import
 
 const serverDebug = debug('server');
 
@@ -24,6 +25,12 @@ app.get('/health', (req, res) => {
 });
 
 const server = http.createServer(app);
+
+// Added /metrics endpoint
+app.get('/metrics', async (req, res) => {
+  res.set('Content-Type', promClient.register.contentType);
+  res.end(await promClient.register.metrics());
+});
 
 server.listen(port, () => {
     serverDebug(`listening on port: ${port}`);
