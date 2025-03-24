@@ -28,8 +28,12 @@ const server = http.createServer(app);
 
 // Added /metrics endpoint
 app.get('/metrics', async (req, res) => {
-  res.set('Content-Type', promClient.register.contentType);
-  res.end(await promClient.register.metrics());
+  try {
+    res.set('Content-Type', promClient.register.contentType);
+    res.end(await promClient.register.metrics());
+  } catch (err) {
+    res.status(500).end(err);
+  }
 });
 
 server.listen(port, () => {
