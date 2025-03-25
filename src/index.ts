@@ -64,6 +64,21 @@ io.on('connection', socket => {
     console.log("connection YAY!!");
     serverDebug(`connection established! ${socket.conn.request.url}`);
     io.to(`${socket.id}`).emit('init-room');
+
+    // -------------------------
+    // ADD PING-PONG HANDLER HERE
+    // -------------------------
+    // When a client emits "ping", reply with "pong".
+    socket.on('ping', (data, callback) => {
+        console.log('Received ping:', data);
+        if (callback && typeof callback === 'function') {
+            callback("pong");
+        } else {
+            socket.emit('pong', "pong");
+        }
+    });
+    // -------------------------
+
     socket.on('join-room', roomID => {
         serverDebug(`${socket.id} has joined ${roomID} for url ${socket.conn.request.url}`);
         socket.join(roomID);
