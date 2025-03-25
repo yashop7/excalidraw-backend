@@ -69,9 +69,13 @@ io.on('connection', socket => {
     // ADD PING-PONG HANDLER HERE
     // -------------------------
     // When a client emits "ping", reply with "pong".
-    socket.on('ping', () => {
-        console.log('Received ping');
-        socket.emit('pong', "pong");
+    socket.on('ping', (data, callback) => {
+        console.log('Received ping:', data);
+        if (callback && typeof callback === 'function') {
+            callback("pong");
+        } else {
+            socket.emit('pong', "pong");
+        }
     });
     // -------------------------
 
