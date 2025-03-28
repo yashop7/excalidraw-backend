@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import http from 'http';
 import { Server, Socket } from 'socket.io';
-import * as prometheus from 'socket.io-prometheus-metrics';
+// import * as prometheus from 'socket.io-prometheus-metrics';
 
 const serverDebug = debug('server');
 
@@ -41,10 +41,10 @@ const io = new Server(server, {
     pingTimeout: 60000
 });
 
-// listens on host:9090/metrics
-prometheus.metrics(io, {
-    collectDefaultMetrics: true
-});
+// // listens on host:9090/metrics
+// prometheus.metrics(io, {
+//     collectDefaultMetrics: true
+// });
 
 io.on('connection', (socket: Socket) => {
     console.log("connection YAY!!");
