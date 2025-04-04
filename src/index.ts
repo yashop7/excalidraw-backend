@@ -20,7 +20,7 @@ const userLimit = Number(process.env.USER_LIMIT) || Infinity;
 
 app.get('/', (req, res) => {
     console.log("Healthy Excalidraw backend is up :)");
-    res.send('Excalidraw backend is up :)');
+    res.send('Excalidraw backend is up V3:)');
 });
 
 const server = http.createServer(app);
